@@ -13,7 +13,7 @@ var port = process.env.port || 3000;
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-// This is needed for static files such as css and pulling in images
+// This is needed for static files such as css or js and pulling in images
 app.use(express.static("public"));
 
 // Root Route
@@ -31,7 +31,7 @@ app.get("/assets/js/index.js", function(req, res) {
   res.sendFile(path.join(__dirname, "./assets/js/index.js"));
 });
 
-// Get Notes Route
+// Get Notes page Route
 app.get("/notes", function(req, res) {
   res.sendFile(path.join(__dirname, "notes.html"));
 });
@@ -67,7 +67,25 @@ app.post("/api/notes", function(req, res) {
 });
 
 // DELETE ROUTE
-app.delete("/api/notes/:id", function(req, res) {});
+app.delete("/api/notes/:id", function(req, res) {
+  // stores the params ID in a variable
+  let noteId = req.params.id;
+
+  fs.readFile("../db/db.json", "utf8", (err, data) => {
+    if (err) throw err;
+
+    const dbNotes = JSON.parse(data);
+    const newDB = dbNotes.filter(function(note) {
+      return note.id !== noteId;
+    });
+
+    fs.writeFile("../db/db.json", JSON.stringify(newDB, null, 2), err => {
+      if (err) throw err;
+      res.send(db);
+      console.log("Note deleted");
+    });
+  });
+});
 
 // Listen on Port
 app.listen(port, function() {
