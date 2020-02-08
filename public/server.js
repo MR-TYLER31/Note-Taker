@@ -43,6 +43,7 @@ app.get("/api/notes", function(req, res) {
 
 // POST JSON NOTES ROUTE
 app.post("/api/notes", function(req, res) {
+  // Create a unique identifier for each note. Each note created will have its own ID by using UUID NPM
   let noteId = uuid();
   let newNote = {
     id: noteId,
