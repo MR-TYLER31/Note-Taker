@@ -5,7 +5,9 @@ const uuid = require("uuid/v4");
 module.exports = function(app) {
   // GET JSON NOTES ROUTE
   app.get("/api/notes", function(req, res) {
-    res.send(db);
+    fs.readFile("./db/db.json", "utf-8", (err, data) => {
+      res.send(JSON.parse(data));
+    });
   });
 
   // POST JSON NOTES ROUTE
@@ -18,7 +20,7 @@ module.exports = function(app) {
       text: req.body.text
     };
 
-    fs.readFile("./db/db.json", "utf8", (err, data) => {
+    fs.readFile("./db/db.json", "utf-8", (err, data) => {
       if (err) throw err;
 
       const dbNotes = JSON.parse(data);
@@ -27,8 +29,8 @@ module.exports = function(app) {
 
       fs.writeFile("./db/db.json", JSON.stringify(dbNotes, null, 2), err => {
         if (err) throw err;
-        res.send(db);
-        console.log("Note created!");
+
+        res.send(dbNotes);
       });
     });
   });
@@ -42,14 +44,14 @@ module.exports = function(app) {
       if (err) throw err;
 
       const dbNotes = JSON.parse(data);
+      // filter method to return note list without selected deleted note
       const newDB = dbNotes.filter(function(note) {
-        note.id !== noteId;
+        return note.id != noteId;
       });
 
       fs.writeFile("./db/db.json", JSON.stringify(newDB, null, 2), err => {
         if (err) throw err;
         res.send(db);
-        console.log("Note deleted");
       });
     });
   });
