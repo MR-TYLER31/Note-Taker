@@ -9,7 +9,7 @@ var port = process.env.port || 3000;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 // This is needed for static files such as css or js and pulling in images
-app.use(express.static(__dirname + "/public"));
+app.use(express.static("public"));
 
 require("./routes/apiRoutes")(app);
 require("./routes/htmlRoutes")(app);
