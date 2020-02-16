@@ -1,6 +1,6 @@
 ## Express Note Taker
 
-<img class="img-fluid py-2" src="public/assets/images/screenshot.PNG" alt="screen shot" width="200" height="200">
+<img class="img-fluid py-2" src="public/assets/images/screenshot.PNG" alt="screen shot" width="400" height="400">
 
 # Description
 
