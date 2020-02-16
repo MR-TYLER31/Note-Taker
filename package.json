@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server4.js",
-    "watch": "nodemon server4.js"
+    "start": "node server.js",
+    "watch": "nodemon server.js"
   },
   "author": "Tyler Snyder",
   "license": "ISC",
