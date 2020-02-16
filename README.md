@@ -1,5 +1,7 @@
 ## Express Note Taker
 
+<img class="img-fluid py-2" src="public/assets/images/screenshot.PNG" alt="screen shot" width="200" height="200">
+
 # Description
 
 Create an application that can be used to write, save, and delete notes. This application will use an express backend and save and retrieve note data from a JSON file.
