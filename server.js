@@ -3,7 +3,7 @@ var express = require("express");
 // =============================================================
 var app = express();
 // This will open on any port when pushed to heroku or port 3000 when on local host
-var port = process.env.port || 3000;
+var PORT = process.env.PORT || 3000;
 
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
@@ -15,6 +15,6 @@ require("./routes/apiRoutes")(app);
 require("./routes/htmlRoutes")(app);
 
 // Listen on Port
-app.listen(port, function() {
-  console.log(`Server is running on ${port}`);
+app.listen(PORT, function() {
+  console.log(`Server is running on ${PORT}`);
 });
